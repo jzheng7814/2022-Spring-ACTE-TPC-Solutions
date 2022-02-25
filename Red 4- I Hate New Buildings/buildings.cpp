@@ -6,7 +6,8 @@ typedef long long int ll;
 typedef long double ld;
 typedef pair<int,int> pii;
 
-void sol() {
+void sol() 
+{
 	int N, M; cin >> N >> M;
 	vector<string> grid(N);
 	for(int i = 0; i < N; i++) cin >> grid[i];
@@ -14,9 +15,12 @@ void sol() {
 	vector<vector<int>> lft, rgt, up, down;
 	lft = rgt = up = down = vector<vector<int>>(N, vector<int>(M));
 
-	for(int i = 0; i < N; i++) {
-		for(int j = 0; j < M; j++) {
-			if(grid[i][j] != 'X') {
+	for(int i = 0; i < N; i++) 
+	{
+		for(int j = 0; j < M; j++) 
+		{
+			if(grid[i][j] != 'X') 
+			{
 				lft[i][j] = j;
 				if(j > 0 && grid[i][j-1] != 'X') lft[i][j] = lft[i][j-1];
 
@@ -26,9 +30,12 @@ void sol() {
 		}
 	}
 
-	for(int i = N-1; i >= 0; i--) {
-		for(int j = M-1; j >= 0; j--) {
-			if(grid[i][j] != 'X') {
+	for(int i = N-1; i >= 0; i--) 
+	{
+		for(int j = M-1; j >= 0; j--) 
+		{
+			if(grid[i][j] != 'X') 
+			{
 				rgt[i][j] = j;
 				if(j+1 < M && grid[i][j+1] != 'X') rgt[i][j] = rgt[i][j+1];
 
@@ -39,8 +46,10 @@ void sol() {
 	}
 
 	pii start, end;
-	for(int i = 0; i < N; i++) {
-		for(int j = 0; j < M; j++) {
+	for(int i = 0; i < N; i++) 
+	{
+		for(int j = 0; j < M; j++) 
+		{
 			if(grid[i][j] == 'S') start = {i, j};
 			if(grid[i][j] == 'E') end = {i, j};
 		}
@@ -53,18 +62,21 @@ void sol() {
 
 	int iters = 0;
 	vector<int> pos;
-	while(sz(dq)) {
+	while(sz(dq)) 
+	{
 		pii now = dq.front(); dq.pop_front();
 		int x = now.first, y = now.second;
 
 		pos = {lft[x][y], rgt[x][y], up[x][y], down[x][y]};
-		for(int k = 0; k < 4; k++) {
+		for(int k = 0; k < 4; k++) 
+		{
 			iters++;
 			int nx = x, ny = y;
 			if(k < 2) ny = pos[k];
 			else nx = pos[k];
 
-			if(vis[nx][ny] == -1) {
+			if(vis[nx][ny] == -1) 
+			{
 				vis[nx][ny] = 1+vis[x][y];
 				dq.push_back({nx, ny});
 			}
@@ -75,7 +87,8 @@ void sol() {
 
 }
 
-int main() {
+int main() 
+{
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	
